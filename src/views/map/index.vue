@@ -1,4 +1,5 @@
-<script setup>
+<script setup lang="ts">
+// @ts-expect-error map no type
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import { onMounted, ref } from 'vue'
@@ -22,7 +23,7 @@ onMounted(() => {
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     }).addTo(map)
-    const marker = L.marker([route.query.latitude, route.query.longitude], {
+    L.marker([route.query.latitude, route.query.longitude], {
       draggable: true,
     }).addTo(map)
   }
@@ -50,7 +51,7 @@ const music = Math.trunc(Number(query.music))
             title="Inline Frame Example"
             width="300"
             height="200"
-            :src="query.url"
+            :src="query.url as string"
           />
 
           <v-card

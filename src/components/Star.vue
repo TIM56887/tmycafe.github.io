@@ -1,19 +1,22 @@
 <script setup lang="ts">
-const props = defineProps({
-  stars: Number,
+defineProps({
+  stars: {
+    type: Number,
+    default: 0,
+  },
 })
 </script>
 
 <template>
   <span>
-    <template v-if="stars > 0">
+    <div v-if="stars > 0">
       <v-icon v-for="star, index in stars" :key="index">
         mdi-star
       </v-icon>
-    </template>
-    <template v-if="stars < 1">
-      0
-    </template>
+    </div>
+
+    <div v-if="stars < 1">0</div>
+
   </span>
 </template>
 
