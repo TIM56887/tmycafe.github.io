@@ -6,7 +6,7 @@ import vueDevTools from 'vite-plugin-vue-devtools'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: 'https://tmycafe.github.io/',
+  base: 'https://tim56887.dev/tmycafe.github.io/dist',
   plugins: [
     vue(),
     vueDevTools(),
