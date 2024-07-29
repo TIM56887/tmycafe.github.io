@@ -1,6 +1,11 @@
 <script setup lang="ts">
 import { useWindowScroll } from '@vueuse/core'
 import { computed, ref, watch } from 'vue'
+import { useAppBarStore } from '@/stores/AppBar'
+import ScrollArrow from '@/components/ScrollArrow.vue'
+import LineMap from '@/components/LineMap.vue'
+
+const AppBarStore = useAppBarStore()
 
 const { y } = useWindowScroll()
 const onTop = computed(() => {
@@ -9,21 +14,40 @@ const onTop = computed(() => {
   }
   return true
 })
-
+const doneStartAnimation = ref(false)
 const viewBoxClass = computed(() => ({
-  'h-100': onTop.value,
-  'w-100': onTop.value,
-  'center': !onTop.value,
+  'h-100': AppBarStore.onTop && doneStartAnimation.value,
+  'w-100': AppBarStore.onTop && doneStartAnimation.value,
+  'center': !AppBarStore.onTop && doneStartAnimation.value,
 }))
+
+function onAnimationEnd() {
+  doneStartAnimation.value = true
+  AppBarStore.show()
+}
 </script>
 
 <template>
   <v-container fluid class="ma-0 pa-0 position-relative" style="height: 100vh">
-    <!--  -->
-    <div class="position-absolute box w-75" :class="viewBoxClass" style="height: 35%;" />
-    <div class="position-absolute box2 w-75" :class="viewBoxClass" style="height: 35%;" />
+    <!-- 輪播的兩個背景圖片 -->
+    <div class="position-absolute box w-50" :class="viewBoxClass" style="height: 25%;" />
+    <div class="position-absolute box2 w-50" :class="viewBoxClass" style="height: 25%;" />
+    <!-- sroll提示文字 -->
+    <ScrollArrow v-if="doneStartAnimation && onTop" />
+    <!-- 載入動畫 -->
+    <div
+      v-if="!doneStartAnimation"
+      class="position-absolute box3 w-50 text-white d-flex align-end justify-end"
+      style="height: 25%;"
+      @animationend="onAnimationEnd"
+    >
+      <h1 class="me-10 mb-10 font-weight-black text-h2">
+        Cafe Cause Life
+      </h1>
+    </div>
+    <!-- 滾輪在最上面顯示的文字 -->
     <transition name="fade">
-      <div v-show="onTop">
+      <div v-show="onTop && doneStartAnimation">
         <h2 class="text-h1 position-absolute font-weight-black opacity-90" style="top: 50%; left: 5%">
           Coffee Cause Life
         </h2>
@@ -44,19 +68,19 @@ const viewBoxClass = computed(() => ({
         </h2>
       </div>
     </transition>
+    <!-- 滾輪不再最上面顯示的文字 -->
     <transition name="fade">
-      <div v-show="!onTop">
-        <h1 class="text-h1 font-weight-black position-absolute" style="bottom: 25%; left: 50%; transform: translate(-50%,0);">
+      <div v-show="!onTop && doneStartAnimation" class="position-absolute" style="bottom: 22%; left: 50%; transform: translate(-50%,0);">
+        <h1 class="text-h1 font-weight-black text-center ">
           Cafe in Taipei
         </h1>
+        <h2 class="mt-5">
+          不確定去哪喝咖啡？我們蒐集了台北市捷運站咖啡廳資訊，讓您輕鬆找到下一個最愛！
+        </h2>
       </div>
     </transition>
   </v-container>
-  <v-container grid-list-xs>
-    <v-layout row wrap>
-      {{ y }}
-    </v-layout>
-  </v-container>
+  <LineMap />
 </template>
 
 <style scoped>
@@ -82,7 +106,7 @@ const viewBoxClass = computed(() => ({
     background-size: 120% auto;
   }
 }
-
+/* 兩個背景圖片樣式 */
 .box {
   background-image: url('/coffeeBackground.jpg');
   background-repeat: no-repeat;
@@ -110,7 +134,41 @@ const viewBoxClass = computed(() => ({
   left: 50%;
   transform: translate(-50%, -50%);
 }
+/* 載入動畫框樣式 */
+.box3 {
+  background: linear-gradient(to right, rgb(224, 133, 72) 50%, white 50%);
+  background-size: 200% 100%;
+  animation: bgColorChange 1s  cubic-bezier(0.33, 0, 0.67, 1);
+  transition: all 0.3s;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 
+@keyframes bgColorChange {
+    0% {
+        background-position: 100% 0;
+    }
+    20% {
+        background-position: 0 0;
+    }
+    30% {
+        background-position: 3% 0;
+    }
+    40% {
+        background-position: 0 0;
+    }
+    50% {
+        background-position: -3% 0;
+    }
+    80% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: -100% 0;
+    }
+}
+/* 文字消失transition */
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.3s ease;
