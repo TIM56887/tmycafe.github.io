@@ -1,21 +1,75 @@
 <script setup lang="ts">
-
+const mapData = [
+  {
+    title: 'What is this for ?',
+    text: `This website was created by Timmy, a frontend developer in Taiwan. Its purpose is to help those who want to learn frontend development by providing a place where they can contribute. Feel free to make a pull request.`,
+    img: 'lineMap1.jpg',
+  },
+  {
+    title: 'App Development',
+    text: `Contributing to this website will enhance your skills by giving you hands-on experience with real-world frontend development projects and collaborative coding.`,
+    img: 'lineMap2.jpg',
+  },
+  {
+    title: 'Product Design',
+    text: `Additionally, contributing to this website will expose you to product design principles, allowing you to improve your skills in creating user-friendly and aesthetically pleasing interfaces.`,
+    img: 'lineMap3.jpg',
+  },
+]
 </script>
 
 <template>
-  <v-container grid-list-md class="position-relative">
+  <v-container fluid class="position-relative ">
     <div class="vertical-dashed-line" />
     <div class="dashed-line-with-circle" />
     <div class="dashed-line-with-circle-end" />
-    <v-row justify="center" class="main-content">
-      <v-col cols="2">
-        dfsa
-      </v-col>
-    </v-row>
+    <template v-for="item, index in mapData" :key="index">
+      <v-row justify="center" align="center" class="main-content" :class="[{ 'flex-row-reverse': (index + 1) % 2 === 0 }]" no-gutters>
+        <v-col cols="4">
+          <v-card
+            color="transparent"
+            flat
+            class="mx-auto"
+          >
+            <v-card-item>
+              <div>
+                <p class="text-h3 mb-1 text-center font-weight-bold element">
+                  {{ item.title }}
+                </p>
+                <br>
+                <div class=" text-grey-darken-2 text-h5">
+                  {{ item.text }}
+                </div>
+              </div>
+            </v-card-item>
+          </v-card>
+        </v-col>
+        <v-col cols="4">
+          <v-img
+            :src="item.img"
+          />
+        </v-col>
+      </v-row>
+    </template>
   </v-container>
 </template>
 
 <style scoped>
+.element {
+            position: relative;
+            padding: 10px;
+        }
+.element::after {
+    content: '';
+    position: absolute;
+    bottom: -10px; /* 调整线条距离元素的垂直距离 */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20%; /* 调整线条的宽度 */
+    height: 6px; /* 调整线条的高度 */
+    background-color: orange;
+}
+
 .main-content {
         padding-top: 200px;
         min-height: 70vh;

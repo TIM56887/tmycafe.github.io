@@ -1,13 +1,20 @@
 <script setup lang="ts">
+import { useRoute } from 'vue-router'
 import AppBar from '@/components/AppBar/index.vue'
+import Footer from '@/components/Footer/index.vue'
+
+const route = useRoute()
 </script>
 
 <template>
   <v-app>
     <AppBar />
-    <v-main class="pa-0">
+    <!-- 首頁appbar才會覆蓋 -->
+    <v-main :class="{ 'pa-0': route.path === '/' }">
       <router-view />
     </v-main>
+    <br>
+    <Footer />
   </v-app>
 </template>
 

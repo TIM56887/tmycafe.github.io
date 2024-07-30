@@ -6,7 +6,7 @@ const AppBarStore = useAppBarStore()
 
 <template>
   <transition>
-    <v-app-bar v-if="AppBarStore.hide" density="comfortable" :elevation="AppBarStore.onTop ? 0 : 1 " floating class="opacity-90">
+    <v-app-bar v-if="!AppBarStore.hide" density="comfortable" :elevation="AppBarStore.onTop ? 0 : 1 " class="opacity-90 pos-relative">
       <v-container fluid>
         <v-layout row wrap height="100%">
           <v-row>

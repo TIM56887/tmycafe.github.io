@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import { useWindowScroll } from '@vueuse/core'
-import { computed, ref, watch } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 import { useAppBarStore } from '@/stores/AppBar'
 import ScrollArrow from '@/components/ScrollArrow.vue'
 import LineMap from '@/components/LineMap.vue'
 
 const AppBarStore = useAppBarStore()
-
+onMounted(() => {
+  AppBarStore.hide = true
+})
 const { y } = useWindowScroll()
 const onTop = computed(() => {
   if (y.value > 0) {
@@ -14,6 +16,7 @@ const onTop = computed(() => {
   }
   return true
 })
+
 const doneStartAnimation = ref(false)
 const viewBoxClass = computed(() => ({
   'h-100': AppBarStore.onTop && doneStartAnimation.value,
@@ -74,9 +77,11 @@ function onAnimationEnd() {
         <h1 class="text-h1 font-weight-black text-center ">
           Cafe in Taipei
         </h1>
-        <h2 class="mt-5">
-          不確定去哪喝咖啡？我們蒐集了台北市捷運站咖啡廳資訊，讓您輕鬆找到下一個最愛！
-        </h2>
+        <router-link to="/list">
+          <h2 class="mt-5 text-grey-darken-2 hover:text-red">
+            不確定去哪喝咖啡？我們蒐集了台北市捷運站咖啡廳資訊，讓您輕鬆找到下一個最愛！
+          </h2>
+        </router-link>
       </div>
     </transition>
   </v-container>
