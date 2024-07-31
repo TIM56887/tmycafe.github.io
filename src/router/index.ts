@@ -1,9 +1,15 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router'
 import Home from '@/views/home/index.vue'
 import Map from '@/views/map/index.vue'
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHashHistory(import.meta.env.BASE_URL),
+  scrollBehavior() {
+    return {
+      left: 0,
+      top: 0,
+    }
+  },
   routes: [
     {
       path: '/',

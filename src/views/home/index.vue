@@ -6,20 +6,14 @@ import ScrollArrow from '@/components/ScrollArrow.vue'
 import LineMap from '@/components/LineMap.vue'
 
 const AppBarStore = useAppBarStore()
-onMounted(() => {
-  AppBarStore.hide = true
-})
-const { y } = useWindowScroll()
-const onTop = computed(() => {
-  if (y.value > 0) {
-    return false
-  }
-  return true
-})
+// onMounted(() => {
+//   AppBarStore.hide = true
+// })
 
 const doneStartAnimation = ref(false)
 const viewBoxClass = computed(() => ({
   'h-100': AppBarStore.onTop && doneStartAnimation.value,
+  'h-25': !(AppBarStore.onTop && doneStartAnimation.value),
   'w-100': AppBarStore.onTop && doneStartAnimation.value,
   'center': !AppBarStore.onTop && doneStartAnimation.value,
 }))
@@ -33,10 +27,10 @@ function onAnimationEnd() {
 <template>
   <v-container fluid class="ma-0 pa-0 position-relative" style="height: 100vh">
     <!-- 輪播的兩個背景圖片 -->
-    <div class="position-absolute box w-50" :class="viewBoxClass" style="height: 25%;" />
-    <div class="position-absolute box2 w-50" :class="viewBoxClass" style="height: 25%;" />
+    <div class="position-absolute box w-50" :class="viewBoxClass" />
+    <div class="position-absolute box2 w-50" :class="viewBoxClass" />
     <!-- sroll提示文字 -->
-    <ScrollArrow v-if="doneStartAnimation && onTop" />
+    <ScrollArrow v-if="doneStartAnimation && AppBarStore.onTop" />
     <!-- 載入動畫 -->
     <div
       v-if="!doneStartAnimation"
@@ -50,7 +44,7 @@ function onAnimationEnd() {
     </div>
     <!-- 滾輪在最上面顯示的文字 -->
     <transition name="fade">
-      <div v-show="onTop && doneStartAnimation">
+      <div v-show="AppBarStore.onTop && doneStartAnimation">
         <h2 class="text-h1 position-absolute font-weight-black opacity-90" style="top: 50%; left: 5%">
           Coffee Cause Life
         </h2>
@@ -73,7 +67,7 @@ function onAnimationEnd() {
     </transition>
     <!-- 滾輪不再最上面顯示的文字 -->
     <transition name="fade">
-      <div v-show="!onTop && doneStartAnimation" class="position-absolute" style="bottom: 22%; left: 50%; transform: translate(-50%,0);">
+      <div v-show="!AppBarStore.onTop && doneStartAnimation" class="position-absolute" style="bottom: 22%; left: 50%; transform: translate(-50%,0);">
         <h1 class="text-h1 font-weight-black text-center ">
           Cafe in Taipei
         </h1>
