@@ -1,7 +1,9 @@
 <script setup lang="ts">
+import { useDisplay } from 'vuetify'
 import { useAppBarStore } from '@/stores/AppBar'
 
 const AppBarStore = useAppBarStore()
+const { mdAndUp } = useDisplay()
 </script>
 
 <template>
@@ -10,17 +12,17 @@ const AppBarStore = useAppBarStore()
       <v-container fluid>
         <v-layout row wrap height="100%">
           <v-row>
-            <v-col cols="2">
+            <v-col cols="2" sm="2">
               <router-link to="/">
                 <div class="d-flex align-center">
-                  <h1 class="text-h5 font-weight-black h-100 me-2">
+                  <h1 v-if="mdAndUp" class="text-h5 font-weight-black h-100 me-2">
                     Taipei Cafe List
                   </h1>
                   <v-icon icon="mdi-coffee-outline" />
                 </div>
               </router-link>
             </v-col>
-            <v-col cols="8">
+            <v-col cols="8" sm="8">
               <v-row justify="center" align="center">
                 <v-col cols="8" class="text-center">
                   <v-btn to="/" :active="false">
@@ -34,7 +36,7 @@ const AppBarStore = useAppBarStore()
                 </v-col>
               </v-row>
             </v-col>
-            <v-col cols="2">
+            <v-col cols="2" sm="2">
               <a href="https://tim56887.dev/" target="_blank">
                 <v-icon icon="mdi-github" class="ms-auto" size="30" />
               </a>
