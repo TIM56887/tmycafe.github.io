@@ -55,8 +55,8 @@ const music = Math.trunc(Number(query.music))
           />
 
           <v-card
-            :title="query.name"
-            :subtitle="query.mrt ? query.mrt : query.address"
+            :title="query.name as string"
+            :subtitle="query.mrt as string? query.mrt as string: query.address as string"
           >
             <template #text>
               <h2>評分</h2>
