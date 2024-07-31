@@ -25,7 +25,7 @@ const headers = reactive ([
     key: 'url',
   },
 
-])
+] as const)
 const $router = useRouter()
 function goMap(data: any) {
   $router.push({
@@ -189,7 +189,7 @@ const coffeeList = computed(() => {
           :items="mrtList"
         />
         <v-data-table
-          
+          :headers="headers"
           :items="coffeeList"
           items-per-page="10"
         >
