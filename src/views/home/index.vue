@@ -6,9 +6,9 @@ import ScrollArrow from '@/components/ScrollArrow.vue'
 import LineMap from '@/components/LineMap.vue'
 
 const AppBarStore = useAppBarStore()
-// onMounted(() => {
-//   AppBarStore.hide = true
-// })
+onMounted(() => {
+  AppBarStore.hide = true
+})
 
 const doneStartAnimation = ref(false)
 const viewBoxClass = computed(() => ({
