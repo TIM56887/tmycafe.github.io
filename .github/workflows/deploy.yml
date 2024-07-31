@@ -19,12 +19,13 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version: 20.11.1
+          cache: pnpm # or pnpm / yarn
 
       - name: Install pnpm
         run: npm install -g pnpm
@@ -35,10 +36,19 @@ jobs:
       - name: Build project
         run: pnpm run build
 
-      - name: Deploy to main branch
-        run: |
-          git config --local user.name "GitHub Actions"
-          git config --local user.email "github-actions@github.com"
-          git add ./dist
-          git commit -m "Deploy to main branch"
-          git push origin main
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    needs: build
+    runs-on: ubuntu-latest
+    name: Deploy
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
