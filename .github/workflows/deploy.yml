@@ -4,14 +4,14 @@ on:
   push:
     branches:
       - main # 當推送到 main 分支時觸發
-  permissions:
-    contents: read
-    pages: write
-    id-token: write
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
 
-  concurrency:
-    group: pages
-    cancel-in-progress: false
+    concurrency:
+      group: pages
+      cancel-in-progress: false
 
 jobs:
   build:
