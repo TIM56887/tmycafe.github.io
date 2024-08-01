@@ -193,8 +193,8 @@ const coffeeList = computed(() => {
           :items="coffeeList"
           items-per-page="10"
         >
-          <template #item.url="{ item }">
-            <v-btn v-if="item.url" :href="item.url" target="_blank" elevation="1">
+          <template #item.url="{ value }">
+            <v-btn v-if="value" :href="value" target="_blank" elevation="1">
               go
             </v-btn>
           </template>
