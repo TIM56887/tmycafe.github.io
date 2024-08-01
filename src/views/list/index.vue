@@ -3,7 +3,7 @@ import { computed, onMounted, reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import data from '@/data.json'
 
-const headers = reactive ([
+const headers = reactive([
   {
     title: '店名',
     align: 'start',
@@ -25,7 +25,7 @@ const headers = reactive ([
     key: 'url',
   },
 
-])
+] as const)
 const $router = useRouter()
 function goMap(data: any) {
   $router.push({

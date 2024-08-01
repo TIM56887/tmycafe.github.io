@@ -3,7 +3,7 @@ import { useDisplay } from 'vuetify'
 import { useAppBarStore } from '@/stores/AppBar'
 
 const AppBarStore = useAppBarStore()
-const { mdAndUp } = useDisplay()
+const { lgAndUp } = useDisplay()
 </script>
 
 <template>
@@ -15,7 +15,7 @@ const { mdAndUp } = useDisplay()
             <v-col cols="2" sm="2">
               <router-link to="/">
                 <div class="d-flex align-center">
-                  <h1 v-if="mdAndUp" class="text-h5 font-weight-black h-100 me-2">
+                  <h1 v-if="lgAndUp" class="text-h6 font-weight-black h-100 me-2">
                     Taipei Cafe List
                   </h1>
                   <v-icon icon="mdi-coffee-outline" />
@@ -24,7 +24,7 @@ const { mdAndUp } = useDisplay()
             </v-col>
             <v-col cols="8" sm="8">
               <v-row justify="center" align="center">
-                <v-col cols="8" class="text-center">
+                <v-col cols="12" sm="8" class="text-center">
                   <v-btn to="/" :active="false">
                     <span class="text-h5 font-weight-black">Home</span>
                   </v-btn>
@@ -33,12 +33,15 @@ const { mdAndUp } = useDisplay()
                       <span class="text-h5 font-weight-black">List</span>
                     </router-link>
                   </v-btn>
+                  <v-btn to="/bigmap" :active="false">
+                    <span class="text-h5 font-weight-black">Map</span>
+                  </v-btn>
                 </v-col>
               </v-row>
             </v-col>
-            <v-col cols="2" sm="2">
+            <v-col cols="2" sm="2" class="d-flex align-center">
               <a href="https://tim56887.dev/" target="_blank">
-                <v-icon icon="mdi-github" class="ms-auto" size="30" />
+                <v-icon icon="mdi-github" class="mx-auto" size="30" />
               </a>
             </v-col>
           </v-row>

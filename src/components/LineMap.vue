@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useDisplay, useLayout } from 'vuetify'
+
 const mapData = [
   {
     title: 'What is this for ?',
@@ -16,6 +18,7 @@ const mapData = [
     img: 'lineMap3.jpg',
   },
 ]
+const { smAndDown } = useDisplay()
 </script>
 
 <template>
@@ -24,8 +27,8 @@ const mapData = [
     <div class="dashed-line-with-circle" />
     <div class="dashed-line-with-circle-end" />
     <template v-for="item, index in mapData" :key="index">
-      <v-row justify="center" align="center" class="main-content" :class="[{ 'flex-row-reverse': (index + 1) % 2 === 0 }]" no-gutters>
-        <v-col cols="4">
+      <v-row justify="center" align="center" class="main-content" :class="[{ 'flex-row-reverse': (index + 1) % 2 === 0, 'flex-column-reverse': smAndDown }]" no-gutters>
+        <v-col cols="12" sm="6" md="4">
           <v-card
             color="transparent"
             flat
@@ -37,14 +40,14 @@ const mapData = [
                   {{ item.title }}
                 </p>
                 <br>
-                <div class=" text-grey-darken-2 text-h5">
+                <div class=" text-grey-darken-2 text-h5" :class="{ 'ps-4': smAndDown }">
                   {{ item.text }}
                 </div>
               </div>
             </v-card-item>
           </v-card>
         </v-col>
-        <v-col cols="4">
+        <v-col cols="12" sm="6" md="4">
           <v-img
             :src="item.img"
           />
@@ -69,65 +72,142 @@ const mapData = [
     height: 6px; /* 调整线条的高度 */
     background-color: orange;
 }
-
 .main-content {
-        padding-top: 200px;
-        min-height: 70vh;
-    }
+    padding-top: 200px;
+    min-height: 70vh;
+}
+@media (min-width: 768px) {
+
+.main-content::after{
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    background-color: white;
+    border-radius: 50%;
+    border: 1px solid rgba(30,30,30,.3);
+    z-index: 100;
+}
+
+.vertical-dashed-line:after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    border-left: 1px dashed rgb(172, 172, 172);
+}
+.vertical-dashed-line:before {
+    content: '';
+    position: absolute;
+    left: 49.7%;
+    top: 78%;
+    width: 10px;
+    height: 10px;
+    background-color: white;
+    border-radius: 50%;
+    border: 1px solid rgba(30,30,30,.3);
+    z-index: 1000;
+}
+.dashed-line-with-circle:after {
+    content: '';
+    position: absolute;
+    left: 49.75%;
+    top: 0px;
+    width: 10px;
+    height: 10px;
+    background-color: white;
+    border-radius: 50%;
+    border: 1px solid rgba(30,30,30,.3);
+}
+.dashed-line-with-circle:before {
+    content: '';
+    position: absolute;
+    left: 49.75%;
+    top: 55%;
+    width: 10px;
+    height: 10px;
+    background-color: white;
+    border-radius: 50%;
+    border: 1px solid rgba(30,30,30,.3);
+}
+.dashed-line-with-circle-end:after{
+    content: "\30FB";
+    line-height: 0.7;
+    text-indent: -6px;
+    display: inline-block;
+    color: #b2b2b2;
+    box-sizing: border-box;
+    border: 1px solid #b2b2b2;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    left: 49.5%;
+    bottom: -10px;
+    background-color: #fff;
+    border-radius: 50%;
+    font-size: 30px;
+}
+}
+@media (max-width: 768px) {
     .main-content::after{
-        content: '';
-        position: absolute;
-        left: 50%;
-        top: 100%;
+        content: ''; /* 伪元素内容为空 */
+        position: absolute; /* 绝对定位 */
+        left: 20%; /* 根据需要调整位置 */
+        top: 110%; /* 圆圈的垂直位置 */
         transform: translate(-50%, -50%);
-        width: 10px;
-        height: 10px;
-        background-color: white;
-        border-radius: 50%;
+        width: 10px; /* 圆圈的宽度 */
+        height: 10px; /* 圆圈的高度 */
+        background-color: white; /* 圆圈的颜色 */
+        border-radius: 50%; /* 圆形 */
         border: 1px solid rgba(30,30,30,.3);
         z-index: 100;
     }
-
     .vertical-dashed-line:after {
         content: '';
         position: absolute;
-        left: 50%;
+        left: 5%; /* 将线条放在中间 */
         top: 0;
         bottom: 0;
-        border-left: 1px dashed rgb(172, 172, 172);
+        border-left: 1px dashed rgb(172, 172, 172); /* 添加虚线 */
+
+    }
+    .dashed-line-with-circle:after {
+        content: ''; /* 伪元素内容为空 */
+        position: absolute; /* 绝对定位 */
+        left: 4%; /* 根据需要调整位置 */
+        top: 0px; /* 圆圈的垂直位置 */
+        width: 10px; /* 圆圈的宽度 */
+        height: 10px; /* 圆圈的高度 */
+        background-color: white; /* 圆圈的颜色 */
+        border-radius: 50%; /* 圆形 */
+        border: 1px solid rgba(30,30,30,.3);
+        z-index: 0;
     }
     .vertical-dashed-line:before {
-        content: '';
-        position: absolute;
-        left: 49.7%;
-        top: 78%;
-        width: 10px;
-        height: 10px;
-        background-color: white;
-        border-radius: 50%;
+        content: ''; /* 伪元素内容为空 */
+        position: absolute; /* 绝对定位 */
+        left: 4%; /* 根据需要调整位置 */
+        top: 73%; /* 圆圈的垂直位置 */
+        width: 10px; /* 圆圈的宽度 */
+        height: 10px; /* 圆圈的高度 */
+        background-color: white; /* 圆圈的颜色 */
+        border-radius: 50%; /* 圆形 */
         border: 1px solid rgba(30,30,30,.3);
         z-index: 1000;
     }
-    .dashed-line-with-circle:after {
-        content: '';
-        position: absolute;
-        left: 49.75%;
-        top: 0px;
-        width: 10px;
-        height: 10px;
-        background-color: white;
-        border-radius: 50%;
-        border: 1px solid rgba(30,30,30,.3);
-    }
     .dashed-line-with-circle:before {
-        content: '';
-        position: absolute;
-        left: 49.75%;
-        top: 55%;
-        width: 10px;
-        height: 10px;
-        background-color: white;
-        border-radius: 50%;
+        content: ''; /* 伪元素内容为空 */
+        position: absolute; /* 绝对定位 */
+        left: 4%; /* 根据需要调整位置 */
+        top: 51%; /* 圆圈的垂直位置 */
+        width: 10px; /* 圆圈的宽度 */
+        height: 10px; /* 圆圈的高度 */
+        background-color: white; /* 圆圈的颜色 */
+        border-radius: 50%; /* 圆形 */
         border: 1px solid rgba(30,30,30,.3);
     }
     .dashed-line-with-circle-end:after{
@@ -141,10 +221,11 @@ const mapData = [
         width: 20px;
         height: 20px;
         position: absolute;
-        left: 49.5%;
+        left: 3%;
         bottom: -10px;
         background-color: #fff;
         border-radius: 50%;
         font-size: 30px;
     }
+}
 </style>

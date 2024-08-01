@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router'
 import Home from '@/views/home/index.vue'
 import Map from '@/views/map/index.vue'
+import BigMap from '@/views/BigMap/index.vue'
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -28,6 +29,11 @@ const router = createRouter({
       path: '/map',
       name: 'Map',
       component: Map,
+    },
+    {
+      path: '/bigmap',
+      name: 'bigmap',
+      component: BigMap,
     },
   ],
 })

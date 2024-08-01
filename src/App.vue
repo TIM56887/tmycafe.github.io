@@ -14,7 +14,8 @@ const route = useRoute()
       <router-view />
     </v-main>
     <br>
-    <Footer />
+    <br>
+    <Footer v-if="route.path !== '/bigmap'" />
   </v-app>
 </template>
 
