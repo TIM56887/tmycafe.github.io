@@ -1,12 +1,22 @@
 <script setup lang="ts">
 // @ts-expect-error map no type
 import L from 'leaflet'
-import 'leaflet/dist/leaflet.css'
-import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css'
-import 'leaflet-defaulticon-compatibility'
+
 import { onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+/* eslint-disable */
+import markerIconUrl from '@/../node_modules/leaflet/dist/images/marker-icon.png'
+ 
+import markerIconRetinaUrl from '@/../node_modules/leaflet/dist/images/marker-icon-2x.png'
+ 
+import markerShadowUrl from '@/../node_modules/leaflet/dist/images/marker-shadow.png'
+/* eslint-enable */
 import Star from '@/components/Star.vue'
+
+L.Icon.Default.prototype.options.iconUrl = markerIconUrl
+L.Icon.Default.prototype.options.iconRetinaUrl = markerIconRetinaUrl
+L.Icon.Default.prototype.options.shadowUrl = markerShadowUrl
+L.Icon.Default.imagePath = ''
 
 const mapContainer = ref(null)
 const route = useRoute()

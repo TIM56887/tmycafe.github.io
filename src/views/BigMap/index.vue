@@ -2,13 +2,21 @@
 // @ts-expect-error noneed
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
-import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css'
-import 'leaflet-defaulticon-compatibility'
-
 import { nextTick, onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+// eslint-disable-next-line
+import markerIconUrl from '@/../node_modules/leaflet/dist/images/marker-icon.png'
+// eslint-disable-next-line
+import markerIconRetinaUrl from '@/../node_modules/leaflet/dist/images/marker-icon-2x.png'
+// eslint-disable-next-line
+import markerShadowUrl from '@/../node_modules/leaflet/dist/images/marker-shadow.png'
+
 import data from '@/data.json'
 
+L.Icon.Default.prototype.options.iconUrl = markerIconUrl
+L.Icon.Default.prototype.options.iconRetinaUrl = markerIconRetinaUrl
+L.Icon.Default.prototype.options.shadowUrl = markerShadowUrl
+L.Icon.Default.imagePath = ''
 const overlay = ref(false)
 const mapContainer = ref(null)
 const $router = useRouter()
