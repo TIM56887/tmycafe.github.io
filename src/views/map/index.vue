@@ -2,6 +2,8 @@
 // @ts-expect-error map no type
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
+import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css'
+import 'leaflet-defaulticon-compatibility'
 import { onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import Star from '@/components/Star.vue'

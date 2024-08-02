@@ -1,7 +1,10 @@
 <script setup lang="ts">
-// @ts-expect-error no need typescript here
+// @ts-expect-error noneed
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
+import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css'
+import 'leaflet-defaulticon-compatibility'
+
 import { nextTick, onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import data from '@/data.json'
