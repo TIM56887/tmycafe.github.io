@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 import Home from '@/views/home/index.vue'
 import Map from '@/views/map/index.vue'
 import BigMap from '@/views/BigMap/index.vue'

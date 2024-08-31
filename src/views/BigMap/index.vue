@@ -3,7 +3,7 @@
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import { nextTick, onMounted, ref } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { useRouter } from 'vue-router'
 // eslint-disable-next-line
 import markerIconUrl from '@/../node_modules/leaflet/dist/images/marker-icon.png'
 // eslint-disable-next-line

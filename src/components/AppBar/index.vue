@@ -12,9 +12,9 @@ const { lgAndUp } = useDisplay()
       <v-container fluid>
         <v-layout row wrap height="100%">
           <v-row>
-            <v-col cols="2" sm="2">
+            <v-col cols="2" sm="2" class="d-flex align-center justify-center">
               <router-link to="/">
-                <div class="d-flex align-center">
+                <div class="d-flex align-center justify-center">
                   <h1 v-if="lgAndUp" class="text-h6 font-weight-black h-100 me-2">
                     Taipei Cafe List
                   </h1>
@@ -23,18 +23,18 @@ const { lgAndUp } = useDisplay()
               </router-link>
             </v-col>
             <v-col cols="8" sm="8">
-              <v-row justify="center" align="center">
+              <v-row justify="center" align="center" class="text-h5">
                 <v-col cols="12" sm="8" class="text-center">
                   <v-btn to="/" :active="false">
-                    <span class="text-h5 font-weight-black">Home</span>
+                    <span class="text-h6 font-weight-black">Home</span>
                   </v-btn>
                   <v-btn>
-                    <router-link active-class="text-h5 font-weight-black" to="/list">
-                      <span class="text-h5 font-weight-black">List</span>
+                    <router-link active-class="text-h6 font-weight-black" to="/list">
+                      <span class="text-h6 font-weight-black">List</span>
                     </router-link>
                   </v-btn>
                   <v-btn to="/bigmap" :active="false">
-                    <span class="text-h5 font-weight-black">Map</span>
+                    <span class="text-h6 font-weight-black">Map</span>
                   </v-btn>
                 </v-col>
               </v-row>

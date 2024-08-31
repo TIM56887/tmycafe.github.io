@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useDisplay, useLayout } from 'vuetify'
+import { useDisplay } from 'vuetify'
 
 const mapData = [
   {

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, reactive, ref } from 'vue'
+import { computed, reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import data from '@/data.json'
 
@@ -8,24 +8,22 @@ const headers = reactive([
     title: '店名',
     align: 'start',
     key: 'name',
+    width: '30%',
   },
   {
     title: '捷運站',
     align: 'center',
     key: 'mrt',
+    width: '30%',
   },
   {
-    title: '地圖',
-    align: 'start',
-    key: 'address',
-  },
-  {
-    title: '官網',
+    title: '地圖 / 官網',
     align: 'center',
-    key: 'url',
+    key: 'actions',
+    width: '40%',
   },
-
 ] as const)
+
 const $router = useRouter()
 function goMap(data: any) {
   $router.push({
@@ -97,13 +95,10 @@ const mrtList = [
   '公館',
   '台電大樓',
   '古亭',
-  '中正紀念堂',
   '小南門',
   '西門',
   '北門',
-  '中山',
   '松江南京',
-  '南京復興',
   '台北小巨蛋',
   '南京三民',
   '松山',
@@ -111,13 +106,9 @@ const mrtList = [
   '景安',
   '永安市場',
   '頂溪',
-  '古亭',
-  '東門',
   '忠孝新生',
-  '松江南京',
   '行天宮',
   '中山國小',
-  '民權西路',
   '大橋頭',
   '台北橋',
   '菜寮',
@@ -143,11 +134,7 @@ const mrtList = [
   '新埔',
   '江子翠',
   '龍山寺',
-  '西門',
-  '台北車站',
   '善導寺',
-  '忠孝新生',
-  '忠孝復興',
   '忠孝敦化',
   '國父紀念館',
   '市政府',
@@ -155,22 +142,18 @@ const mrtList = [
   '後山埤',
   '昆陽',
   '南港',
-  '南港展覽館',
-  '大坪林',
   '十四張',
   '秀朗橋',
   '景平',
-  '景安',
   '中和',
   '橋和',
   '中原',
   '板新',
-  '板橋',
   '新埔民生',
-  '頭前庄',
   '幸福',
   '新北產業園區',
 ]
+
 const condition = ref('雙連')
 const coffeeList = computed(() => {
   return data.filter((item) => {
@@ -180,35 +163,60 @@ const coffeeList = computed(() => {
 </script>
 
 <template>
-  <v-container grid-list-sm>
-    <v-layout row wrap height="90vh">
-      <v-col>
-        <v-select
-          v-model="condition"
-          label="捷運站"
-          :items="mrtList"
-        />
-        <v-data-table
-          :headers="headers"
-          :items="coffeeList"
-          items-per-page="10"
-        >
-          <template #item.url="{ value }">
-            <v-btn v-if="value" :href="value" target="_blank" elevation="1">
-              go
-            </v-btn>
-          </template>
-          <template #item.address="{ item }">
-            <v-btn elevation="1" @click="goMap(item)">
-              go
-            </v-btn>
-          </template>
-        </v-data-table>
-      </v-col>
-    </v-layout>
+  <v-container fluid class="pa-6">
+    <v-card elevation="2" class="pa-4">
+      <v-card-title class="text-h4 mb-4">台北咖啡廳列表</v-card-title>
+      <v-autocomplete
+        v-model="condition"
+        label="選擇捷運站"
+        :items="mrtList"
+        outlined
+        dense
+        clearable
+        auto-select-first
+        hide-no-data
+        hide-details
+        class="mb-4"
+      >
+        <template #prepend-inner>
+          <v-icon>mdi-subway-variant</v-icon>
+        </template>
+      </v-autocomplete>
+      <v-data-table
+        :headers="headers"
+        :items="coffeeList"
+        :items-per-page="10"
+        class="elevation-1"
+      >
+        <template #header.mrt="{ header }">
+          <div class="w-100 bg-blue"></div>
+        </template>
+        <template #[`item.name`]="{ item }">
+          <p class="font-weight-bold">
+            {{ item.name }}
+          </p>
+        </template>
+        <template #[`item.actions`]="{ item }">
+          <v-btn color="secondary" small outlined class="mr-sm-2 mr-xs-0" @click="goMap(item)">
+            <v-icon left small>
+              mdi-map-marker
+            </v-icon>
+            地圖
+          </v-btn>
+          <v-btn v-if="item.url" color="primary" small outlined :href="item.url" target="_blank">
+            <v-icon left small>
+              mdi-web
+            </v-icon>
+            官網
+          </v-btn>
+        </template>
+      </v-data-table>
+    </v-card>
   </v-container>
 </template>
 
 <style scoped>
-
+.v-data-table {
+  border-radius: 8px;
+}
 </style>
