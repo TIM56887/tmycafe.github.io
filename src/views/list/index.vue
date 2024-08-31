@@ -171,10 +171,10 @@ const mrtList = [
   { line: 'yellow', name: '新北產業園區' },
 ]
 
-const condition = ref('雙連')
+const selectedStations = ref(['雙連'])
 const coffeeList = computed(() => {
   return data.filter((item) => {
-    return item.mrt.includes(condition.value)
+    return selectedStations.value.some(station => item.mrt.includes(station))
   })
 })
 </script>
@@ -186,13 +186,15 @@ const coffeeList = computed(() => {
         台北咖啡廳列表
       </v-card-title>
       <v-autocomplete
-        v-model="condition"
+        v-model="selectedStations"
         label="選擇捷運站"
         :items="mrtList"
         :item-title="item => item.name"
         :item-value="item => item.name"
         variant="outlined"
         density="compact"
+        multiple
+        chips
         clearable
         auto-select-first
         hide-no-data
