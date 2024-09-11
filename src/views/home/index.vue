@@ -38,29 +38,29 @@ function onAnimationEnd() {
       style="height: 25%;"
       @animationend="onAnimationEnd"
     >
-      <h1 class="me-10 mb-10 font-weight-black text-h2">
+      <h1 class="me-10 mb-10 font-weight-black text-h2 unselectable" style="font-family: 'Roboto', sans-serif;">
         Cafe Cause Life
       </h1>
     </div>
     <!-- 滾輪在最上面顯示的文字 -->
     <transition name="fade">
       <div v-show="AppBarStore.onTop && doneStartAnimation">
-        <h2 class="text-h1 position-absolute font-weight-black opacity-90" style="top: 50%; left: 5%">
+        <h2 class="text-h1 position-absolute font-weight-black opacity-90 unselectable" style="top: 50%; left: 5%; font-family: 'Roboto', sans-serif;">
           Coffee Cause Life
         </h2>
-        <h2 class="text-h5 position-absolute font-weight-black opacity-30" style="top: 80%; left: 5%">
+        <h2 class="text-h5 position-absolute font-weight-black opacity-30 unselectable" style="top: 80%; left: 5%; font-family: 'Roboto', sans-serif;">
           Coffee addiction: Do people consume too much caffeine?
         </h2>
-        <h2 class="text-h4 position-absolute font-weight-black opacity-50" style="top: 70%; left: 50%">
+        <h2 class="text-h4 position-absolute font-weight-black opacity-50 unselectable" style="top: 70%; left: 50%; font-family: 'Roboto', sans-serif;">
           You Can Die From a Caffeine Overdose
         </h2>
-        <h2 class="text-h3 position-absolute font-weight-black opacity-20" style="top: 20%; left: 30%">
+        <h2 class="text-h3 position-absolute font-weight-black opacity-20 unselectable" style="top: 20%; left: 30%; font-family: 'Roboto', sans-serif;">
           Caffeine Ruined My Life
         </h2>
-        <h2 class="text-h5 position-absolute font-weight-black opacity-30" style="top: 30%; left: 20%">
+        <h2 class="text-h5 position-absolute font-weight-black opacity-30 unselectable" style="top: 30%; left: 20%; font-family: 'Roboto', sans-serif;">
           How I Quit Drinking Caffeine & Transformed My Life
         </h2>
-        <h2 class="text-h1 position-absolute font-weight-black opacity-40" style="top: 26%; left: 80%">
+        <h2 class="text-h1 position-absolute font-weight-black opacity-40 unselectable" style="top: 26%; left: 80%; font-family: 'Roboto', sans-serif;">
           Caffeine is a SCAM
         </h2>
       </div>
@@ -68,11 +68,11 @@ function onAnimationEnd() {
     <!-- 滾輪不再最上面顯示的文字 -->
     <transition name="fade">
       <div v-show="!AppBarStore.onTop && doneStartAnimation" class="position-absolute" style="bottom: 22%; left: 50%; transform: translate(-50%,0);">
-        <h1 class="text-h1 font-weight-black text-center ">
+        <h1 class="text-h1 font-weight-black text-center unselectable" style="font-family: 'Roboto', sans-serif;">
           Cafe in Taipei
         </h1>
         <router-link to="/list">
-          <h2 class="mt-5 text-grey-darken-2 hover:text-red">
+          <h2 class="mt-5 text-grey-darken-2 hover:text-red unselectable" style="font-family: 'Roboto', sans-serif;">
             不確定去哪喝咖啡？我們蒐集了台北市捷運站咖啡廳資訊，讓您輕鬆找到下一個最愛！
           </h2>
         </router-link>
@@ -118,6 +118,8 @@ function onAnimationEnd() {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 .box2 {
   background-image: url('/coffeeBackground2.jpg');
@@ -132,6 +134,8 @@ function onAnimationEnd() {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 /* 載入動畫框樣式 */
 .box3 {
@@ -142,6 +146,8 @@ function onAnimationEnd() {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 @keyframes bgColorChange {
@@ -176,5 +182,10 @@ function onAnimationEnd() {
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
+}
+
+/* Prevent text selection */
+.unselectable {
+  user-select: none;
 }
 </style>

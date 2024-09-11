@@ -4,17 +4,18 @@ import { useDisplay } from 'vuetify'
 const mapData = [
   {
     title: 'What is this for ?',
-    text: `This website was created by Timmy, a frontend developer in Taiwan. Its purpose is to help those who want to learn frontend development by providing a place where they can contribute. Feel free to make a pull request.`,
+    text: `Discover Your Perfect Café with Us!
+          Looking for a cozy spot to sip your favorite brew, meet friends, or get some work done? We’ve got you covered! Our platform helps you find the ideal café that matches your vibe—whether you’re after the best espresso in town, a quiet corner to study, or a trendy hangout spot. With detailed reviews, photos, and easy search options, finding the perfect café has never been easier. Let us guide you to your next favorite coffee spot!`,
     img: 'lineMap1.jpg',
   },
   {
-    title: 'App Development',
-    text: `Contributing to this website will enhance your skills by giving you hands-on experience with real-world frontend development projects and collaborative coding.`,
+    title: `Why you shouldn't work at home`,
+    text: `Working from home may seem convenient, but it can blur boundaries and hinder productivity. Distractions, isolation, and the lack of a dedicated workspace can take a toll on your focus. Consider stepping out to a café or coworking space for a clearer mind and better work-life balance.`,
     img: 'lineMap2.jpg',
   },
   {
-    title: 'Product Design',
-    text: `Additionally, contributing to this website will expose you to product design principles, allowing you to improve your skills in creating user-friendly and aesthetically pleasing interfaces.`,
+    title: 'Work at a Café Can Change Your Life',
+    text: `Switching up your workspace can do wonders for your life. Working at a café offers more than just a caffeine boost—it brings fresh inspiration, new social connections, and a focused environment that can transform your productivity. The vibrant atmosphere and change of scenery can lead to creative breakthroughs and a better work-life balance. Experience how a simple shift in location can change the way you work and live.`,
     img: 'lineMap3.jpg',
   },
 ]
