@@ -4,14 +4,14 @@ import L from 'leaflet'
 
 import { onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { toast } from "vue3-toastify";
-/* eslint-disable import/no-absolute-path */
+import { toast } from 'vue3-toastify'
+
 import markerIconUrl from '@/../node_modules/leaflet/dist/images/marker-icon.png'
- 
+
 import markerIconRetinaUrl from '@/../node_modules/leaflet/dist/images/marker-icon-2x.png'
- 
+
 import markerShadowUrl from '@/../node_modules/leaflet/dist/images/marker-shadow.png'
-/* eslint-enable import/no-absolute-path */
+
 import Star from '@/components/Star.vue'
 
 L.Icon.Default.prototype.options.iconUrl = markerIconUrl
@@ -56,13 +56,13 @@ function copyAddress() {
       .then(() => {
         copyMessage.value = '地址已複製到剪貼簿'
         toast('地址已複製到剪貼簿', {
-              "theme": "colored",
-              "type": "default",
-              "pauseOnFocusLoss": false,
-              "autoClose": 1000,
-              "hideProgressBar": true,
-              "transition": "flip",
-              "dangerouslyHTMLString": true
+          theme: 'colored',
+          type: 'default',
+          pauseOnFocusLoss: false,
+          autoClose: 1000,
+          hideProgressBar: true,
+          transition: 'flip',
+          dangerouslyHTMLString: true,
         })
         setTimeout(() => {
           copyMessage.value = ''
@@ -75,7 +75,8 @@ function copyAddress() {
           copyMessage.value = ''
         }, 3000)
       })
-  } else {
+  }
+  else {
     copyMessage.value = '沒有可用的地址'
     setTimeout(() => {
       copyMessage.value = ''
@@ -103,8 +104,10 @@ function copyAddress() {
             <div>
               <h2>{{ query.mrt }}</h2>
               <div>
-                <h2 @click="copyAddress">{{ query.address }}</h2>
-                <v-btn @click="copyAddress" icon="mdi-content-copy" />
+                <h2 @click="copyAddress">
+                  {{ query.address }}
+                </h2>
+                <v-btn icon="mdi-content-copy" @click="copyAddress" />
               </div>
             </div>
           </template>

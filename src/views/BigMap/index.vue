@@ -4,13 +4,9 @@ import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import { nextTick, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
-// eslint-disable-next-line
 import markerIconUrl from '@/../node_modules/leaflet/dist/images/marker-icon.png'
-// eslint-disable-next-line
 import markerIconRetinaUrl from '@/../node_modules/leaflet/dist/images/marker-icon-2x.png'
-// eslint-disable-next-line
 import markerShadowUrl from '@/../node_modules/leaflet/dist/images/marker-shadow.png'
-
 import data from '@/data.json'
 
 L.Icon.Default.prototype.options.iconUrl = markerIconUrl
@@ -55,6 +51,15 @@ onMounted(() => {
         const marker = L.marker([i.latitude, i.longitude], {
           title: i.name,
         }).addTo(map)
+        marker.bindPopup(`
+        <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 10px;">
+          <div><strong>${i.name}</strong></div>
+          <div>${i.address}</div>
+          <button style="background-color: white; color: black; padding: 2px 4px; border: 1px solid black; border-radius: 0px; cursor: pointer; transition: background-color 0.3s ease;" onclick="navigator.clipboard.writeText('${i.address}').then(() => { alert('地址：${i.address} 已複製到剪貼簿') })">
+            Copy 
+          </button>
+        </div>
+        `)
         markers.push({ marker, data: i })
       }
     })
